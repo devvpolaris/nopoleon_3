@@ -1,0 +1,82 @@
+<div class="container  {% unless section.settings.remove_margin %} container--vertical-space {% endunless %} {% unless section.settings.full_width %} container--large {% else %} container--fullwidth {% endunless %}">
+  {%- liquid
+    for block in section.blocks
+      render block
+    endfor
+  -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.apps.name",
+  "class": "mount-app",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:local-march-update.labels.section_design"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.image.fullwidth",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_margin",
+      "label": "t:sections.local-extra-words.sections.rich-text.settings.remove_margin.label",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.apps.presets.name"
+    }
+  ]
+}
+{% endschema %}
+<!-- bundle design layout  -->
+<style>
+  .rb-modal-description .hide,
+  .rb-modal-description .hidden {
+    display: block;
+  }
+  #build-a-box {
+    display: flex;
+    justify-content: space-between;
+  }
+  div[data-v-337af9] {
+    width: 70%;
+  }
+  .status-bar-sign-up.rb-container.rb-sticky-container {
+    width: 30%;
+  }
+  .rb-bg.rb-sticky-content.tflex.tflex-row.tflex-wrap.tjustify-between.titems-center {
+    position: sticky;
+    top: 1%;
+  }
+  .rb-form .rb-btn-wrapper.tdb.tw-100.tw-auto-ns.trelative {
+    display: none;
+  }
+  .rb-box-builder.rb-container {
+    width: 96%;
+    float: left;
+  }
+  @media screen and (max-width: 1024px) {
+    #build-a-box {
+      flex-wrap: wrap;
+    }
+    div[data-v-337af9] {
+      width: 100%;
+    }
+    .status-bar-sign-up.rb-container.rb-sticky-container {
+      width: 100%;
+    }
+  }
+</style>
+<!-- bundle design layout  -->

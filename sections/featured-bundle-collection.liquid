@@ -1,0 +1,550 @@
+{{ 'component-product-item.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-product-custombundle.css' | asset_url | stylesheet_tag }}
+
+<div class="container--large {% unless section.settings.remove_margin %} container--vertical-space {% endunless %} {% if section.settings.section_background_color != "rgba(0,0,0,0)" %} container--has-background {% endif %} remove-empty-space">
+<input type="hiden" class="minCartprice" value="{% if section.settings.minprice != blank %}{{ section.settings.minprice }}{% endif %}"/>
+<input type="hiden"  class="maxCartprice"  value="{% if section.settings.maxprice != blank %}{{ section.settings.maxprice }}{% endif %}"/>
+  {% comment %} <div id="product-filter" class="customfilter container--large {% unless section.settings.remove_margin %} container--vertical-space {% endunless %} {% if section.settings.section_background_color != "rgba(0,0,0,0)" %} container--has-background {% endif %} remove-empty-space">
+    <!-- Filter options like checkboxes, dropdowns, etc. -->
+    <select id="product-filterselect">
+    <option value="/collections/all">All Flavors</option>
+    <option value="/collections/fruit-flavors">Fruit Flavors</option>
+    <option value="/collections/caffeinated">Caffeinated</option>
+    <option value="/collections/vegan" >Vegan</option>
+    <option value="/collections/whey-protein">Whey Protein</option>
+    </select>
+  </div> {% endcomment %}
+  <div class="bundle_flex">
+    <div class="subtextflex">
+      <div><h2 class="subtext1">{{section.settings.subtext1}}</h2></div>
+      <div id="" class="newcustomfilter container--large {% unless section.settings.remove_margin %} container--vertical-space {% endunless %} {% if section.settings.section_background_color != "rgba(0,0,0,0)" %} container--has-background {% endif %} remove-empty-space">
+      {% comment %} <div class="seconfsection"><span class="seconfsectiontext">2</span> </div>
+        <div class="filterlabelmain"><div class="filterlabel">Protein Bundles</div></div> {% endcomment %}
+        {% assign collection =  section.settings.collection %}
+        {% assign collection1 =  section.settings.collection1 %}
+        {% assign collection2 =  section.settings.collection2 %}
+        {% assign collection3 =  section.settings.collection3 %}
+        {% assign collection4 =  section.settings.collection4 %}
+        <ul class="filtertab">
+            {%  if collection != blank %}<li class="mainboxli" data-collection-id="{{ collections[collection].id   }}"><span class="tablisting active" value="{{ collections[collection].url }}">{{ collections[collection].title }} </span></li>{% endif %}
+            {%  if collection1 != blank %}<li class="mainboxli" data-collection-id="{{ collections[collection1].id   }}"><span class="tablisting" value="{{ collections[collection1].url }}">{{ collections[collection1].title }}</span></li>{% endif %}
+            {%  if collection2 != blank %}<li class="mainboxli" data-collection-id="{{ collections[collection2].id   }}"><span class="tablisting" value="{{ collections[collection2].url }}">{{ collections[collection2].title }}</span></li>{% endif %}
+            {%  if collection3 != blank %}<li class="mainboxli" data-collection-id="{{ collections[collection3].id   }}"><span class="tablisting"  value="{{ collections[collection3].url }}">{{ collections[collection3].title }}</span></li>{% endif %}
+            {%  if collection4 != blank %}<li class="mainboxli" data-collection-id="{{ collections[collection4].id   }}"><span class="tablisting" value="{{ collections[collection4].url }}">{{ collections[collection4].title }}</span></li>{% endif %}
+        </ul>
+        <div id="product-filter" class="customfilter container--large {% unless section.settings.remove_margin %} container--vertical-space {% endunless %} {% if section.settings.section_background_color != "rgba(0,0,0,0)" %} container--has-background {% endif %} remove-empty-space">
+          <!-- Filter options like checkboxes, dropdowns, etc. -->
+          <select id="product-filterselect">
+            {%  if collection != blank %}<option  value="{{ collections[collection].url }}"  data-collection-id="{{ collections[collection].id   }}">{{ collections[collection].title }} </option>{% endif %}
+            {%  if collection1 != blank %}<option  value="{{ collections[collection1].url }}"  data-collection-id="{{ collections[collection1].id   }}">{{ collections[collection1].title }}</option>{% endif %}
+            {%  if collection2 != blank %}<option  value="{{ collections[collection2].url }}"  data-collection-id="{{ collections[collection2].id   }}">{{ collections[collection2].title }}</option>{% endif %}
+            {%  if collection3 != blank %}<option  value="{{ collections[collection3].url }}"  data-collection-id="{{ collections[collection3].id   }}">{{ collections[collection3].title }}</option>{% endif %}
+            {%  if collection4 != blank %}<option value="{{ collections[collection4].url }}"  data-collection-id="{{ collections[collection4].id   }}">{{ collections[collection4].title }}</option>{% endif %}
+          </select>
+        </div> 
+      </div>
+      <div><h2 class="subtext1" style="margin-top: 1rem;">{{section.settings.subtext2}}</h2></div>
+  </div>
+  {%- render 'section-heading', heading: section.settings.heading, subheading: section.settings.subheading, button: section.settings.show_view_all, button_label: 'collections.view_all_products', link: collections[section.settings.collection].url, heading_tag: section.settings.seo_h_tag, layout: section.settings.section_heading_layout -%}
+ </div>
+  <div class="custom-bundle">
+
+    {%- if section.settings.style == 'slider' -%}
+      <css-slider
+        data-options='{
+                      "selector": ".product-item container-box",
+                      "indexNav": true,
+                      "groupCells": true,
+                      "navigationDOM": "<span class=\"css-slider-button css-slider-prev\" style=\"display:none\"><svg fill=\"none\" height=\"13\" viewBox=\"0 0 8 13\" width=\"8\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"#000\" ><path d=\"m7.91419 1.41431-6.48529 6.48528-1.4142102-1.41422 6.4852802-6.48527702z\"/><path d=\"m6.48528 12.9849-6.48528027-6.48532 1.41421027-1.41421 6.48528 6.48523z\"/></g></svg></span><span class=\"css-slider-button css-slider-next\" style=\"display:none\"><svg width=\"9\" height=\"13\" viewBox=\"0 0 9 13\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M0.914169 11.5857L7.39945 5.10041L8.81367 6.51463L2.32838 12.9999L0.914169 11.5857Z\" fill=\"black\"/><path d=\"M2.34307 0.0151367L8.82835 6.50042L7.41414 7.91463L0.928857 1.42935L2.34307 0.0151367Z\" fill=\"black\"/></svg></span>"
+                    }'
+        class="css-slider css-slider--bottom-navigation"
+        id="css-slider-{{ section.id }}">
+        {%- render 'custom-shadow', section_id: section.id -%}
+      {%- endif -%}
+
+      <div id="filtered-products" class="main-custombundle  grid {% if section.settings.style == 'slider' %} grid--slider {% else %} grid--layout {% endif %} {{ section.settings.layout }}">
+
+        {%- liquid
+          if section.settings.collection != blank
+            for product in collections[section.settings.collection].products limit: section.settings.products_number
+              render 'bundle-product-item',product: product,collection:collections[section.settings.collection], product_collection: collections[section.settings.collection], section_blocks: section.blocks, index: forloop.index, layout: section.settings.layout
+            endfor
+          else 
+            for i in (1..section.settings.products_number)
+              render 'bundle-product-item', class:"container-box", blank_product: true, section_blocks: section.blocks, index: forloop.index
+            endfor
+          endif
+        -%}
+
+      </div>
+      <div class="cartcolumn">
+        <div class="box-header">
+                <div class="box-header-title">ADD MORE AND EARN REWARDS</div>
+                <div class="progress-container">
+                  <div>
+                    <div class="range-input">
+                      <div class="range-slider__indicators">
+                        <div class="range-slider__value range-slider__value--max"></div>
+                      </div>
+                      <input type="range" min='0' max="130" value="0" step="10" id="rangeSlider">
+                      <div class="value">
+                        <div class="margin-top"></div>
+                       </div>
+                    </div> 
+                    <ul class="range-labels">
+                      <li class="active selected">$10</li>
+                      <li>$20</li>
+                      <li>$30</li>
+                      <li>$40</li>
+                      <li>$50</li>
+                      <li>$60</li>
+                      <li>$70</li>
+                      <li>$80</li>
+                      <li>{% if section.settings.minprice != blank %}{{ section.settings.minprice }}{% endif %}</li>
+                      <li>$100</li>
+                      <li>$110</li>
+                      <li>$120</li>
+                      <li>{% if section.settings.maxprice != blank %}{{ section.settings.maxprice }}{% endif %}</li>
+                    </ul>
+                  </div>
+                  <div class="containercircle containerCircle">
+                    <button class="circlebtn">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none" class="inline-block"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.75364 0.796137C1.40364 0.408427 0.836178 0.408427 0.486178 0.796137C0.136178 1.18385 0.136178 1.81245 0.486178 2.20016L5.6075 7.87328C5.9575 8.26099 6.52496 8.26099 6.87496 7.87328L11.9963 2.20016C12.3463 1.81245 12.3463 1.18385 11.9963 0.796138C11.6463 0.408428 11.0788 0.408428 10.7288 0.796138L6.23878 5.76996L1.75364 0.796137Z" fill="currentColor"></path></svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="product-container">
+                  <div class="box-summary" id="cartSummary"> </div>
+                  <div class="box-giftproduct">
+                  {% if section.settings.product_list != blank %}
+                    {% assign  productgift = section.settings.product_list  %}
+                    <div class="maingiftproductitem">
+                    {%  render 'product-item-gift-product', product: productgift, section_blocks: section.blocks, index: forloop.index, layout: 'shop' %}
+                    </div>
+                    {% endif %}
+                      
+                  </div> 
+                </div>
+                <div class="box-footer">
+                  {%- assign product_form_id = 'product-form-' | append: section.id -%}
+                  {%- assign current_variant = product.selected_or_first_available_variant -%}
+                    {%- form 'product', product, id: product_form_id, class: 'form bundle_product', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                      <input type="hidden" name="id" value="{{ current_variant.id }}" class="product_variant_id">
+                      <div class="product__cart-functions">
+                
+                        <div class="flex-buttons">
+                          {%- liquid 
+                            if block.settings.show_quantity_selector
+                              render 'product-quantity', variant: current_variant, id: section.id
+                            endif
+                          -%}
+                          <button type="submit" name="add" class="addToCart add-to-cart button button--solid button--product button--loader" data-js-product-add-to-cart>
+                            <span class="button__text" data-js-product-add-to-cart-text {% if block.settings.show_preorder %} data-show-preorder-wording {% endif %}>
+                              {%- liquid
+                                    echo '90$ Left to checkout'
+                              -%}
+                            </span>
+                            <span class="button__preloader">
+                              <svg class="button__preloader-element" viewBox="25 25 50 50"><circle cx="50" cy="50" r="20" fill="none" stroke-width="4"/></svg>
+                            </span>
+                          </button>
+                  
+                          {%- liquid
+                            if block.settings.show_dynamic_checkout and block.settings.show_gift_card_recipient == false
+                              echo form | payment_button
+                            endif
+                          -%}
+                  
+                        </div>
+                        
+                      </div>
+                    {%- endform -%}
+                </div>
+         </div>
+         <div class="cart-overlay">
+         </div>
+      </div>
+        {%- if section.settings.layout == 'slider' -%}
+         </css-slider>
+        {%- endif -%}
+
+  </div>
+  <div class="cartcolumn stickycart">
+    <div class="stickycartbtn">
+      {%- assign product_form_id = 'product-form-' | append: section.id -%}
+      {%- assign current_variant = product.selected_or_first_available_variant -%}
+          <div class="">
+    
+            <div class="">
+              {%- liquid 
+                if block.settings.show_quantity_selector
+                  render 'product-quantity', variant: current_variant, id: section.id
+                endif
+              -%}
+              <button type="submit" name="add" class="stickyAddtocart add-to-cart button button--solid button--product button--loader" data-js-product-add-to-cart>
+                <span class="button__text" data-js-product-add-to-cart-text {% if block.settings.show_preorder %} data-show-preorder-wording {% endif %}>
+                  {%- liquid
+                        echo 'Cart total should be at least $90'
+                  -%}
+                </span>
+                <span class="button__preloader">
+                  <svg class="button__preloader-element" viewBox="25 25 50 50"><circle cx="50" cy="50" r="20" fill="none" stroke-width="4"/></svg>
+                </span>
+              </button>      
+            </div>
+          </div>
+    </div>
+  </div>
+  {%- if section.settings.show_view_all and section.settings.section_heading_layout contains 'center' -%}
+    <div class="gutter-top--large align-content align-content--horizontal-center">
+      <a class="button button--outline button--regular" href="{{ collections[section.settings.collection].url }}">{{ 'collections.view_all_products' | t }}</a>
+    </div>
+  {%- endif -%}
+
+</div>
+
+{%- if section.settings.section_background_color != "rgba(0,0,0,0)" -%}
+  {% style %}
+    #shopify-section-{{ section.id }}.container--has-background {
+      --color-background-section: {{ section.settings.section_background_color }}
+      ;
+    }
+  {% endstyle %}
+{%- endif -%}
+
+{%- if section.settings.section_heading_color != "rgba(0,0,0,0)" -%}
+  {% style %}
+    #shopify-section-{{ section.id }}{
+      --color-text-main: {{ section.settings.section_heading_color }}
+      ;
+    }
+  {% endstyle %}
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "featured bundle coll aaa",
+    "class": "mount-css-slider",
+  
+    "blocks": [
+      {
+        "type": "price",
+        "name": "t:sections.local-extra-words.sections.product-card.blocks.price",
+        "limit": 1
+      },
+      {
+        "type": "title",
+        "name": "t:sections.local-extra-words.sections.product-card.blocks.title",
+        "limit": 1
+      },
+      {
+        "type": "quick_buy",
+        "name": "t:sections.local-extra-words.sections.product-card.blocks.quick_buy",
+        "limit": 1
+      },
+      {
+        "type": "add_button",
+        "name": "t:sections.local-extra-words.sections.product-card.blocks.add_buton",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "button_title",
+            "label": "t:sections.local-extra-words.sections.product-card.blocks.text.settings.text.button_heading",
+            "default": "default"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_quantity_selector",
+            "label": "t:sections.main-product.blocks.buy_buttons.settings.show_quantity_selector.label",
+            "default": true
+          }
+        ]
+      }, {
+        "type": "vendor",
+        "name": "t:sections.local-extra-words.sections.product-card.blocks.vendor",
+        "limit": 1
+      }, {
+        "type": "rating",
+        "name": "t:sections.local-extra-words.sections.product-card.blocks.rating",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "select",
+            "id": "reviews_app",
+            "label": "t:local-march-update.blocks.rating.app",
+            "options": [
+              {
+                "value": "default",
+                "label": "t:local-march-update.blocks.rating.default_option"
+              }, {
+                "value": "loox",
+                "label": "Loox"
+              }, {
+                "value": "judgeme",
+                "label": "Judge.me"
+              }
+            ],
+            "default": "default"
+          }
+        ]
+      }, {
+        "type": "local_availability",
+        "name": "t:sections.local-extra-words.settings_schema.product-card.local-pickup.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "t:sections.local-extra-words.settings_schema.product-card.local-pickup.info"
+          }
+        ]
+      }, {
+        "type": "icons",
+        "name": "t:sections.local-extra-words.sections.main-product.blocks.icons.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "t:sections.local-extra-words.sections.main-product.blocks.icons.help"
+          }
+        ]
+      }, {
+        "type": "text",
+        "name": "t:sections.local-extra-words.sections.product-card.blocks.text.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "metafield",
+            "label": "t:sections.local-extra-words.sections.product-card.blocks.text.settings.text.label",
+            "info": "t:sections.local-extra-words.sections.product-card.blocks.text.info",
+            "info": "custom.product_text"
+          }, {
+            "type": "select",
+            "id": "text_size",
+            "label": "t:sections.local-extra-words.sections.product-card.blocks.text.settings.size.label",
+            "options": [
+              {
+                "value": "text-size--xsmall",
+                "label": "t:sections.local-extra-words.sections.product-card.blocks.text.settings.size.option__1"
+              }, {
+                "value": "text-size--regular",
+                "label": "t:sections.local-extra-words.sections.product-card.blocks.text.settings.size.option__2"
+              }, {
+                "value": "text-size--large",
+                "label": "t:sections.local-extra-words.sections.product-card.blocks.text.settings.size.option__3"
+              }
+            ],
+            "default": "text-size--regular"
+          }, {
+            "type": "color",
+            "id": "text_color",
+            "label": "t:sections.local-extra-words.sections.product-card.blocks.text.settings.color.label",
+            "default": "#6A6A6A"
+          }, {
+            "type": "checkbox",
+            "id": "text_transform",
+            "label": "t:sections.local-extra-words.sections.product-card.blocks.text.settings.transform.label",
+            "default": false
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:local-march-update.labels.heading"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "t:sections.local-extra-words.sections.headings.heading",
+        "default": "Featured collection"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "t:sections.local-extra-words.sections.headings.subheading",
+        "default": "Showcase your best products"
+      },
+      {
+        "type": "text",
+        "id": "subtext1",
+        "label": "Sub Text",
+        "default": "Quickly fill your box with our preselected bundles"
+      },
+      {
+        "type": "text",
+        "id": "subtext2",
+        "label": "Sub text1",
+        "default": "Or, personalize with your favorites"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_view_all",
+        "label": "t:sections.featured-collection.settings.show_view_all.label",
+        "default": true
+      }, {
+        "type": "select",
+        "id": "section_heading_layout",
+        "label": "t:sections.rich-text.settings.text_alignment.label",
+        "options": [
+          {
+            "value": "section-heading--left",
+            "label": "t:sections.rich-text.settings.text_alignment.options__1.label"
+          }, {
+            "value": "section-heading--center",
+            "label": "t:sections.rich-text.settings.text_alignment.options__2.label"
+          }
+        ],
+        "default": "section-heading--left"
+      }, {
+        "type": "header",
+        "content": "t:sections.main-article.blocks.content.name"
+      }, {
+        "type": "select",
+        "id": "style",
+        "label": "t:sections.featured-collection.settings.layout.label",
+        "options": [
+          {
+            "label": "t:sections.featured-collection.settings.layout.options__1.label",
+            "value": "slider"
+          }, {
+            "label": "t:sections.featured-collection.settings.layout.options__2.label",
+            "value": "grid"
+          }
+        ],
+        "default": "grid"
+      }, {
+        "type": "select",
+        "id": "layout",
+        "label": "t:sections.local-extra-words.sections.columns.name",
+        "info": "t:sections.local-extra-words.sections.columns.info",
+        "options": [
+          {
+            "value": "grid-3 grid-lap-2 grid-tiny-1",
+            "label": "t:sections.local-extra-words.sections.columns.option__2"
+          }, {
+            "value": "grid-4 grid-portable-3 grid-lap-2 grid-tiny-1",
+            "label": "t:sections.local-extra-words.sections.columns.option__3"
+          }
+        ],
+        "default": "grid-4 grid-portable-3 grid-lap-2 grid-tiny-1"
+      }, {
+        "type": "range",
+        "id": "products_number",
+        "label": "t:sections.featured-collection.settings.products_number.label",
+        "min": 4,
+        "max": 16,
+        "step": 1,
+        "default": 8
+      }, {
+        "type": "collection",
+        "id": "collection",
+        "label": "t:sections.featured-collection.settings.collection.label"
+      }, 
+      {
+        "type": "collection",
+        "id": "collection1",
+        "label": "t:sections.featured-collection.settings.collection.label"
+      },
+      {
+        "type": "collection",
+        "id": "collection2",
+        "label": "t:sections.featured-collection.settings.collection.label"
+      },
+      {
+        "type": "collection",
+        "id": "collection3",
+        "label": "t:sections.featured-collection.settings.collection.label"
+      },
+      {
+        "type": "collection",
+        "id": "collection4",
+        "label": "t:sections.featured-collection.settings.collection.label"
+      },
+      {
+        "type": "product",
+        "id": "product_list",
+        "label": "Add gift Product"
+      },
+      {
+        "type": "header",
+        "content": "t:local-march-update.labels.section_design"
+      }, {
+        "type": "color",
+        "id": "section_background_color",
+        "label": "Background color",
+        "default": "rgba(0,0,0,0)"
+      }, {
+        "type": "color",
+        "id": "section_heading_color",
+        "label": "Heading text color",
+        "default": "rgba(0,0,0,0)"
+      }, {
+        "type": "checkbox",
+        "id": "remove_margin",
+        "label": "t:sections.local-extra-words.sections.rich-text.settings.remove_margin.label",
+        "default": false
+      }, {
+        "type": "header",
+        "content": "t:sections.refactor_words.seo.name"
+      }, {
+        "type": "select",
+        "id": "seo_h_tag",
+        "label": "t:sections.refactor_words.seo.label",
+        "info": "t:sections.refactor_words.seo.info",
+        "options": [
+          {
+            "value": "h1",
+            "label": "H1"
+          },
+          {
+            "value": "h2",
+            "label": "H2"
+          },
+          {
+            "value": "h3",
+            "label": "H3"
+          },
+          {
+            "value": "h4",
+            "label": "H4"
+          }, {
+            "value": "span",
+            "label": "span"
+          }
+        ],
+        "default": "h2"
+      },
+      {
+        "type": "text",
+        "id": "minprice",
+        "label": "Minimum price for cart",
+        "default": "$90"
+      },
+      {
+        "type": "text",
+        "id": "maxprice",
+        "label": "Maximum price for cart",
+        "default": "$130"
+      }
+    ],
+    "presets": [
+      {
+        "name": "featured bundle coll",
+        "blocks": [
+          {
+            "type": "price"
+          }, {
+            "type": "title"
+          }, {
+            "type": "quick_buy"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+      "groups": ["header"]
+    }
+  }
+{% endschema %}

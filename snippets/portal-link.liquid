@@ -1,0 +1,59 @@
+<script src="https://static.rechargecdn.com/assets/storefront/recharge-client-1.9.0.min.js"></script>
+<portal-link></portal-link>
+
+<script>
+  class PortalLink extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+      this.renderLink();
+    }
+
+    async login() {
+      this.session = await recharge.auth.loginShopifyAppProxy();
+    }
+
+    async fetchPortalAccess() {
+      this.portalAccess = await recharge.customer.getCustomerPortalAccess(this.session);
+    }
+
+    async renderLink() {
+      await this.login();
+      await this.fetchPortalAccess();
+
+      this.shadowRoot.innerHTML = `
+        <style>
+          a.button {
+            appearance: none;
+            display: inline-block;
+            width: auto;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            font: bold 11px Arial;
+            text-decoration: none;
+            background-color: #557b97;
+            color: #fff;
+            padding: 8px 10px;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            font-family: "Work Sans", sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            white-space: normal;
+            font-size: 0.75em;
+            line-height: 1;
+          }
+        </style>
+        <a class="button" href="${this.portalAccess.portal_url}">Manage Subscriptions</a>
+      `;
+    }
+  }
+
+  customElements.define('portal-link', PortalLink);
+  console.log("HHHHH");
+</script>

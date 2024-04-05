@@ -1,0 +1,19 @@
+{%- assign rc_displayed_bundles = '' -%}
+{%- assign rc_bundles = '' -%}
+{%- assign rc_bundles_cart_count = cart.item_count -%}
+{%- assign rc_bundles_count = 0 -%}
+{%- assign rc_bundles_item_count = 0 -%}
+
+{%- for item in cart.items -%}
+  {%- if item.properties._rc_bundle -%}
+    {%- unless rc_bundles contains item.properties._rc_bundle -%}
+      {%- assign rc_bundles = rc_bundles | append: ',' | append: item.properties._rc_bundle -%}
+      {%- assign rc_bundles_count = rc_bundles_count | plus: 1 -%}
+    {%- endunless -%}
+
+    {%- assign rc_bundles_item_count = rc_bundles_item_count | plus: item.quantity -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- assign rc_bundles = rc_bundles | remove_first: ',' -%}
+{%- assign rc_bundles_cart_count = rc_bundles_cart_count | minus: rc_bundles_item_count | plus: rc_bundles_count -%}

@@ -1,0 +1,38 @@
+/* custombundle for product header  */
+.header-custombundle.site-header .header-container{
+    background: #fff;
+}
+.header-custombundle .custombundleheader {
+    padding-top: 15px;
+    padding-bottom: 12px;
+}
+.back-arrow .header-button{
+    width: 2rem;
+    height: 2rem;   
+    position: absolute;
+    left: 0;
+    /* top: 24%; */
+}
+.custombundleheader.container--large{
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.site-header .logo{
+    justify-content: center;
+}
+.custombundleheader  .arrow-flex{
+    display: flex;
+    align-items: center;
+}
+@media screen and (min-width: 768px){
+    .site-header .custombundleheader .logo{
+        padding-inline-end: 0;
+    }
+}
+
+/* custombundle for product header  */
